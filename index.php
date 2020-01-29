@@ -1,26 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- TAG responsivo -->
-  <title> Tela de login </title>
+  <title> Acesso ao sistema</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<style type="text/css">
+  <style type="text/css">
   #tamanho {
     margin-top: 40px;
     width: 350px;
     border-radius: 15px;
     border: 2px solid #f3f3f3;
     -webkit-box-shadow: 10px 10px 31px -5px rgba(163,163,163,1);
-    -moz-box-shadow: 10px 10px 31px -5px rgba(163,163,163,1);
     box-shadow: 10px 10px 31px -5px rgba(163,163,163,1);
     padding: 25px;
   }
 </style>
-
-
 </head>
 
 <body>
@@ -47,7 +42,7 @@
 </div>
 <center>
 <div style="margin-top: 20px">
-  <small>Se você não possui cadastro, clique <a href="cadastro_usuario_externo.php">aqui </a>.</small>
+  <small>Se você não possui cadastro, fale com o coordenador ou gestor</a>.</small>
 </div>
 </center>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

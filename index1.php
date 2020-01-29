@@ -1,33 +1,43 @@
 <?php
-include 'conexao.php';
-include 'script/password.php';
 
-$usuario = $_POST['usuario'];
-$senhainformada = $_POST['senha'];
+    $nomeDaInclude1 = "criaClasseBanco.inc.php";
+    require_once $nomeDaInclude1;
 
-$sql = "SELECT emailusuario, senhausuario, status  FROM usuario WHERE emailusuario = '$usuario'";
-$buscar = mysqli_query($conexao, $sql);
+    $banco = new Banco();
+    $conexao = $banco->conectar();
+    $banco->definirCharset($conexao);
+    $banco->criarBanco($conexao);
+    $banco->usaBanco($conexao);
+    $banco->criaTabela($conexao);
 
-echo $total = mysqli_num_rows($buscar);
+    $usuario = trim($conexao->escape_string($_POST["usuario"]));
+    $senhainformada = trim($conexao->escape_string($_POST["senha"]));
 
-while ($array = mysqli_fetch_array($buscar)) {
-    $senha = $array['senhausuario'];
-    $senhadecodificada = sha1($senhainformada);
+    $sql = "SELECT loginUsuario, senhaUsuario FROM $banco->tabelaUsuarios WHERE loginUsuario = '$usuario' ";
+    $buscar = $conexao->query($sql) or die($conexao->error);
 
-    if ($total > 0 && $array['status'] == 'Ativo') {
-        
-        if ($senha == $senhadecodificada) {
-            session_start();
-            $_SESSION['usuario'] = $usuario;
-            header("Location: menu.php");    
-        }
-        else {
-            header("Location: erroSenha.php");
-        }
-    }
-    else {
-        echo "teste";
+    $total = mysqli_num_rows($buscar);
+
+    if ($total == 0) {
+        echo 'teste';
         header("Location: erro.php");
     }
-}
+    else {
+        while ($array = mysqli_fetch_array($buscar)) {
+            echo $senha = $array['senhaUsuario'];
+            echo " -- ";
+            echo $senhadecodificada = hash('sha512', $senhainformada);
+            
+            if ($senha == $senhadecodificada) {
+                session_start();
+                $_SESSION['usuario'] = $usuario;
+                header("Location: menu.php");    
+            }
+            else {
+                header("Location: erroSenha.php");
+            }
+            
+        }
+    }       
+    $banco->desconectar($conexao);
 ?>

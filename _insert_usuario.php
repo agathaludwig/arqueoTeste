@@ -1,17 +1,24 @@
 <?php
+    $nomeDaInclude1 = "criaClasseBanco.inc.php";
+    require_once $nomeDaInclude1;
 
-include 'conexao.php';
-include 'script/password.php';
+    $banco = new Banco();
+    $conexao = $banco->conectar();
+    $banco->definirCharset($conexao);
+    $banco->criarBanco($conexao);
+    $banco->usaBanco($conexao);
+    $banco->criaTabela($conexao);
 
-$nomeusuario = $_POST['nomeusuario'];
-$emailusuario = $_POST['emailusuario'];
-$senhausuario = $_POST['senhausuario'];
-$nivelusuario = $_POST['nivelusuario'];
-$status = "Ativo";
+    $nomeusuario = trim($conexao->escape_string($_POST["nomeusuario"]));
+    $emailusuario = trim($conexao->escape_string($_POST["emailusuario"]));
+    $loginusuario = trim($conexao->escape_string($_POST["loginusuario"]));
+    $senhausuario = trim($conexao->escape_string($_POST["senhausuario"]));
+    $nivelusuario = trim($conexao->escape_string($_POST["nivelusuario"]));
+    $senhadecodificada = hash('sha512', $senhausuario);
 
-$sql = "INSERT INTO `usuario`(`nomeusuario`, `emailusuario`, `senhausuario`, `nivelusuario`, `status`) VALUES ('$nomeusuario','$emailusuario',sha1('$senhausuario'),$nivelusuario,'$status')";
+    $sql = "INSERT INTO `$banco->tabelaUsuarios`(`nomeusuario`, `emailusuario`, `loginusuario`, `senhausuario`, `nivelusuario`) VALUES ('$nomeusuario','$emailusuario', '$loginusuario', '$senhadecodificada', $nivelusuario)";
 
-$inserir = mysqli_query($conexao, $sql);
+    $inserir = $conexao->query($sql) or die($conexao->error);
 
 ?>
 
