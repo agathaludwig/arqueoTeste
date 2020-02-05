@@ -24,9 +24,8 @@
     }
     else {
         while ($array = mysqli_fetch_array($buscar)) {
-            echo $senha = $array['senhaUsuario'];
-            echo " -- ";
-            echo $senhadecodificada = hash('sha512', $senhainformada);
+            $senha = $array['senhaUsuario'];
+            $senhadecodificada = hash('sha512', $senhainformada);
             
             if ($senha == $senhadecodificada) {
                 session_start();

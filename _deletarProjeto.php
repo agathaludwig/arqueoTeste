@@ -19,8 +19,8 @@
 
     $id = $_GET['id'];
 
-    $sql = "DELETE FROM `usuarios` WHERE idUsuario = $id";
+    $sql = "DELETE FROM `projetos` WHERE idProjeto = $id";
     $deletar = $conexao->query($sql) or die($conexao->error);
 
-    header("Location: listarUsuarios.php?removido"); 
+    header("Location: listarProjetos.php?removido"); 
 ?>

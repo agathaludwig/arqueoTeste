@@ -1,12 +1,3 @@
-<?php
-session_start();
-if (!isset($_SESSION['usuario'])) {
-	header('location: index.php');
-	exit();
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -15,11 +6,14 @@ if (!isset($_SESSION['usuario'])) {
   <title> Cadastro de usuário </title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
-
+<?php
+$nomeDaInclude2 = "navbar.inc.php";
+require_once $nomeDaInclude2;
+?>
 <body>
-  <div class="container" style="margin-top: 40px; width: 400px">
+<div class="container" style="margin: 40px auto; width: 500px">
   <h4>Cadastro de usuário </h4>
-    <form action="_insert_usuario.php" method="post">
+    <form action="_insert_usuario.php" method="post" style="margin-top: 20px">
       <div class="form-group">
         <label> Nome </label>
         <input type="text" name="nomeusuario" class= "form-control" autocomplete="off" required placeholder="Nome completo">
@@ -47,7 +41,7 @@ if (!isset($_SESSION['usuario'])) {
       </div>
 
       <div style="text-align: right">
-      <a href="menu.php" role="button" class="btn btn-sm btn-primary">Voltar</a>
+      <a href="listarUsuarios.php" role="button" class="btn btn-sm btn-primary">Voltar</a>
       <button type="submit" class="btn btn-sm btn-success">Cadastrar</button>
     </div>
     </form>

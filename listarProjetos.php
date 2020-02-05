@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title> Lista de usuários </title>
+  <title> Lista de Projetos </title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script src="https://kit.fontawesome.com/bb54122f21.js" crossorigin="anonymous"></script>
 </head>
@@ -17,7 +17,7 @@ require_once $nomeDaInclude2;
 if (isset($_GET['editado'])){
   ?>
   <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    Usuário editado com sucesso.
+    Projeto editado com sucesso.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -26,7 +26,7 @@ if (isset($_GET['editado'])){
 } else if (isset($_GET['removido'])){
   ?>
   <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    Usuário removido com sucesso.
+    Projeto removido com sucesso.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -35,7 +35,7 @@ if (isset($_GET['editado'])){
 } else if (isset($_GET['inserido'])){
   ?>
   <div class="alert alert-success alert-dismissible fade show" role="alert">
-    Usuário adicionado com sucesso.
+    Projeto adicionado com sucesso.
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -43,51 +43,69 @@ if (isset($_GET['editado'])){
   <?php
 } 
 ?>
-    <h3> Lista de usuários </h3>
+    <h3> Lista de Projetos </h3>
     <br>
     <table class="table">
       <thead>
         <tr>
+          <th scope="col">Acrônimo</th>
           <th scope="col">Nome</th>
-          <th scope="col">Categoria</th>
-          <th scope="col">Projetos</th>
+          <th scope="col">Coordenador</th>
+          <th scope="col">Equipe</th>
+          <th scope="col">Status</th>
           <th scope="col">Ação</th>
         </tr>
       </thead>
 
       <?php
 
-      $sql = "SELECT * FROM `usuarios`";
-      $buscar = $conexao->query($sql) or die($conexao->error);
-
+      $sql1 = "SELECT * FROM `projetos` ORDER BY status";
+      $buscar = $conexao->query($sql1) or die($conexao->error);
 
       while ($array = mysqli_fetch_array($buscar)) {
-        $idusuario = $array['idUsuario'];
-        $nomeusuario = $array['nomeUsuario'];
-        $nivelusuario = $array['nivelUsuario'];
+        $idProjeto = $array['idProjeto'];
+        $acronimo = $array['acronimo'];
+        $nome = $array['nome'];
+        $idCoordenador = $array['coordenador'];
+
+        $sql2 = "SELECT * FROM `usuarios` WHERE idUsuario = $idCoordenador";
+        $buscar1 = $conexao->query($sql2) or die($conexao->error);
+        $registro1 = $buscar1->fetch_array();
+        $nomeCoordenador = htmlentities($registro1[1], ENT_QUOTES, "UTF-8");
+    
+        $status = $array['status'];
       ?>
         <tr>
-          <td><?php echo $nomeusuario ?></td>
+          <td><?php echo $acronimo ?></td>
+          <td><?php echo $nome ?></td>
+          <td><?php echo $nomeCoordenador ?></td>
+          <td><?php 
+            $sql3 = "SELECT nomeUsuario FROM usuarios, usuario_projeto WHERE usuarios.idUsuario = usuario_projeto.idUsuario AND usuario_projeto.idProjeto = $idProjeto";
+            $buscar2 = $conexao->query($sql3) or die($conexao->error);
+            while ($row = mysqli_fetch_array($buscar2)) {
+              $nomePesquisador = htmlentities($row[0], ENT_QUOTES, "UTF-8");
+              echo "$nomePesquisador <br>";
+            }
+          
+          ?></td>
           <td><?php
-              if ($nivelusuario == 1) {
-                echo "Gestor";
+              if ($status == 1) {
+                echo "Em andamento";
               }
-              if ($nivelusuario == 2) {
-                echo "Coordenador";
+              if ($status == 2) {
+                echo "Encerrado";
               }
-              if ($nivelusuario == 3) {
-                echo "Pesquisador";
-              }
-              ?></td>
-          <td> </td> <!-- TODO Select com projetos -->
-          <td><a class="btn btn-warning btn-sm" style="color:#fff" href="editarUsuario.php?id=<?php echo $idusuario ?>" role="button"><i class="far fa-edit"></i>&nbsp;Editar</a>
-            <a class="btn btn-danger btn-sm" style="color:#fff" href="_deletarUsuario.php?id=<?php echo $idusuario ?>" role="button"><i class="far fa-trash-alt"></i>&nbsp;Remover</a></td>
+              ?>
+            </td>
+          <td><a class="btn btn-warning btn-sm" style="color:#fff" href="editarProjeto.php?id=<?php echo $idProjeto ?>" role="button"><i class="far fa-edit"></i>&nbsp;Editar</a>
+            <a class="btn btn-danger btn-sm" style="color:#fff" href="_deletarProjeto.php?id=<?php echo $idProjeto ?>" role="button"><i class="far fa-trash-alt"></i>&nbsp;Remover</a>
+            <a class="btn btn-info btn-sm" style="color:#fff" href="cadastro_colecao.php?id=<?php echo $idProjeto ?>" role="button"><i class="far fa-plus-square"></i>&nbsp;Adicionar coleção</a></td>
         <?php } ?>
         </tr>
     </table>
 
     <div style="text-align: right">
-      <a href="cadastro_usuario.php" role="button" class="btn btn-sm btn-success">Cadastrar novo</a>
+      <a href="cadastro_projeto.php" role="button" class="btn btn-sm btn-success">Cadastrar novo</a>
       <a href="menu.php" role="button" class="btn btn-sm btn-primary">Voltar</a>
     </div>
   </div>

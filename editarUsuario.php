@@ -1,8 +1,3 @@
-<?php
-include "conexao.php";
-$id = $_GET['id'];
-?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -10,52 +5,53 @@ $id = $_GET['id'];
   <title> Editar Usuário </title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
-
-<body>
 <?php
-session_start();
-$usuario = $_SESSION['usuario'];
-
-if(!isset($_SESSION['usuario'])) {
-  header('Location: index.php');
-}
+$nomeDaInclude2 = "navbar.inc.php";
+require_once $nomeDaInclude2;
+$id = $_GET['id'];
 ?>
-  <div class="container" style="margin-top: 40px; width: 500px">
+<body>
+<div class="container" style="margin: 40px auto; width: 500px">
     <h4> Editar Usuário </h4>
     <form action="_atualizarUsuario.php" method="post" style="margin-top: 20px">
       <?php
-      $sql = "SELECT * FROM `usuario` WHERE idusuario = $id ";
+      $sql = "SELECT * FROM `usuarios` WHERE idUsuario = $id ";
       $busca = mysqli_query($conexao, $sql);
       while ($array = mysqli_fetch_array($busca)) {
         //$idusuario = $array['idusuario'];
-        $nomeusuario = $array['nomeusuario'];
-        $emailusuario = $array['emailusuario'];
-        $nivelusuario = $array['nivelusuario'];
+        $nomeusuario = $array['nomeUsuario'];
+        $emailusuario = $array['emailUsuario'];
+        $loginusuario = $array['loginUsuario'];
+        $senhausuario = $array['senhaUsuario'];
+        $nivelusuario = $array['nivelUsuario'];
       ?>
         <div class="form-group">
           <label> Nome </label>
-          <input type="text" class="form-control" name="nomeusuario" value="<?php echo $nomeusuario ?>" disabled>
+          <input type="text" class="form-control" name="nomeusuario" value="<?php echo $nomeusuario ?>">
           <input type="number" class="form-control" name="id" value="<?php echo $id ?>" style="display: none">
         </div>
         <div class="form-group">
           <label> Email </label>
-          <input type="text" class="form-control" name="emailusuario" value="<?php echo $emailusuario ?>" disabled>
+          <input type="text" class="form-control" name="emailusuario" value="<?php echo $emailusuario ?>">
+        </div>
+        <div class="form-group">
+          <label> Login </label>
+          <input type="text" class="form-control" name="loginusuario" value="<?php echo $loginusuario ?>">
         </div>
         <div class="form-group">
         <label> Nível de Acesso</label>
         <select class="form-control" name="nivelusuario">
         <!-- <optgroup> agrupa as opções do option -->
-          <option value="1" <?php if(1 == $nivelusuario ){ echo "selected";}  ?> >Administrador</option>
-          <option value="2" <?php if(2 == $nivelusuario ){ echo "selected";}  ?> >Funcionário</option>
-          <option value="3" <?php if(3 == $nivelusuario ){ echo "selected";}  ?> >Conferente</option>
+          <option value="1" <?php if(1 == $nivelusuario ){ echo "selected";}  ?> >Gestor</option>
+          <option value="2" <?php if(2 == $nivelusuario ){ echo "selected";}  ?> >Coordenador</option>
+          <option value="3" <?php if(3 == $nivelusuario ){ echo "selected";}  ?> >Pesquisador</option>
         </select>
-        <!-- FIXME Como deixar a opção já selecionada -->
       </div>
 
       <?php } ?>
       <div style="text-align: right">
        <a href="listarUsuarios.php" role="button" class="btn btn-sm btn-primary">Voltar</a> 
-       <button type="submit" class="btn btn-sm btn-danger" id="botao">Atualizar</button>
+       <button type="submit" class="btn btn-sm btn-danger" >Atualizar</button>
       </div>
     </form>
   </div>
