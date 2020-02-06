@@ -125,7 +125,7 @@ if (isset($_GET['editado'])){
             echo "Pendente";
           }?></td>
           <td><a class="btn btn-warning btn-sm" style="color:#fff" href="editarColecao.php?id=<?php echo $idColecao ?>" role="button"><i class="far fa-edit"></i>&nbsp;Editar</a>
-            <a class="btn btn-danger btn-sm" style="color:#fff" href="_deletarColecao.php?id=<?php echo $idColecao ?>" role="button"><i class="far fa-trash-alt"></i>&nbsp;Remover</a>
+            <a class="btn btn-danger btn-sm" style="color:#fff" href="javascript:func()" role="button" onclick="aviso(<?php echo $idColecao ?>)"><i class="far fa-trash-alt"></i>&nbsp;Remover</a>
             <a class="btn btn-info btn-sm" style="color:#fff" href="cadastro_peca.php?id=<?php echo $idColecao ?>" role="button"><i class="far fa-plus-square"></i>&nbsp;Adicionar peça</a></td>
         <?php } ?>
         </tr>
@@ -136,6 +136,18 @@ if (isset($_GET['editado'])){
       <a href="menu.php" role="button" class="btn btn-sm btn-primary">Voltar</a>
     </div>
   </div>
+
+  <script>
+function aviso(idColecao)
+{
+  let resposta = confirm("Atenção! \nTem certeza que deseja remover esta coleção? \nTodas as peças e análises também serão removidas.");
+ 
+     if (resposta == true) {
+          window.location.href = "_deletarColecao.php?id="+idColecao;
+     }
+     }
+</script>
+
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
