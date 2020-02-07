@@ -38,7 +38,7 @@ require_once $nomeDaInclude2;
             <p class="card-text">Estabelecer, alterar, remover e monitorar cronogramas.</p>
           </div>
           <div class="card-footer" style="border: none; background-color: white">
-            <a href="listarCronogramas.php" class="btn btn-primary" style>Cronogramas</a>
+            <a href="pagConstrucao.php" class="btn btn-primary" style>Cronogramas</a>
           </div>
         </div>
 
@@ -49,7 +49,7 @@ require_once $nomeDaInclude2;
             <p class="card-text">Checar a produtividade individual.</p>
           </div>
           <div class="card-footer" style="border: none; background-color: white">
-            <a href="listarProdutividade.php" class="btn btn-primary" style>Produtividade</a>
+            <a href="pagConstrucao.php" class="btn btn-primary" style>Produtividade</a>
           </div>
         </div>
 
@@ -60,7 +60,7 @@ require_once $nomeDaInclude2;
             <p class="card-text">Selecionar e gerar relatórios de dados de análises.</p>
           </div>
           <div class="card-footer" style="border: none; background-color: white">
-            <a href="gerarRelatorios.php" class="btn btn-primary" style>Relatórios</a>
+            <a href="pagConstrucao.php" class="btn btn-primary" style>Relatórios</a>
           </div>
         </div>
 

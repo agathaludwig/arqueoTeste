@@ -6,6 +6,11 @@
   <title> Lista de usuários </title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script src="https://kit.fontawesome.com/bb54122f21.js" crossorigin="anonymous"></script>
+  <style>
+    tr, td {
+      text-align: center;
+    }
+  </style>
 </head>
 <?php
 $nomeDaInclude2 = "navbar.inc.php";
@@ -57,11 +62,11 @@ if (isset($_GET['editado'])){
 
       <?php
 
-      $sql = "SELECT * FROM `usuarios`";
-      $buscar = $conexao->query($sql) or die($conexao->error);
+      $sql1 = "SELECT * FROM `usuarios`";
+      $buscar1 = $conexao->query($sql1) or die($conexao->error);
 
 
-      while ($array = mysqli_fetch_array($buscar)) {
+      while ($array = mysqli_fetch_array($buscar1)) {
         $idusuario = $array['idUsuario'];
         $nomeusuario = $array['nomeUsuario'];
         $nivelusuario = $array['nivelUsuario'];
@@ -79,7 +84,14 @@ if (isset($_GET['editado'])){
                 echo "Pesquisador";
               }
               ?></td>
-          <td> </td> <!-- TODO Select com projetos -->
+          <!-- TODO Select com projetos -->
+          <td><?php 
+            $sql2 = "SELECT acronimo FROM projetos, usuario_projeto WHERE projetos.idProjeto = usuario_projeto.idProjeto AND usuario_projeto.idUsuario = $idusuario";
+            $buscar2 = $conexao->query($sql2) or die($conexao->error);
+            while ($row = mysqli_fetch_array($buscar2)) {
+              $nomePesquisador = htmlentities($row[0], ENT_QUOTES, "UTF-8");
+              echo "$nomePesquisador <br>";
+            }?></td>
           <td><a class="btn btn-warning btn-sm" style="color:#fff" href="editarUsuario.php?id=<?php echo $idusuario ?>" role="button"><i class="far fa-edit"></i>&nbsp;Editar</a>
             <a class="btn btn-danger btn-sm" style="color:#fff" href="_deletarUsuario.php?id=<?php echo $idusuario ?>" role="button"><i class="far fa-trash-alt"></i>&nbsp;Remover</a></td>
         <?php } ?>

@@ -16,11 +16,11 @@
   $banco->usaBanco($conexao);
   $banco->criaTabela($conexao);
 
-  $id = $_POST['id'];
-  $acronimo = $_POST['acronimo'];
-  $nome = $_POST['nome'];
-  $coordenador = $_POST['coordenador'];
-  $status = $_POST['status'];
+  $id = trim($conexao->escape_string($_POST['id']));
+  $acronimo = trim($conexao->escape_string($_POST['acronimo']));
+  $nome = trim($conexao->escape_string($_POST['nome']));
+  $coordenador = trim($conexao->escape_string($_POST['coordenador']));
+  $status = trim($conexao->escape_string($_POST['status']));
 
   // UPDATE TABELA PROJETOS
   $sql = "UPDATE `projetos` SET `acronimo`='$acronimo', `nome`='$nome', `coordenador`='$coordenador', `status`=$status  WHERE idProjeto = $id";

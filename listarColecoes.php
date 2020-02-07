@@ -6,6 +6,11 @@
   <title> Lista de Coleções Arqueológicas </title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script src="https://kit.fontawesome.com/bb54122f21.js" crossorigin="anonymous"></script>
+  <style>
+    tr, td {
+      text-align: center;
+    }
+  </style>
 </head>
 <?php
 $nomeDaInclude2 = "navbar.inc.php";
@@ -60,7 +65,7 @@ if (isset($_GET['editado'])){
 
       <?php
 
-      $sql = "SELECT * FROM `colecoes`";
+      $sql = "SELECT * FROM `colecoes` ORDER BY idProjeto, status";
       $buscar = $conexao->query($sql) or die($conexao->error);
 
       while ($array = mysqli_fetch_array($buscar)) {
@@ -126,7 +131,8 @@ if (isset($_GET['editado'])){
           }?></td>
           <td><a class="btn btn-warning btn-sm" style="color:#fff" href="editarColecao.php?id=<?php echo $idColecao ?>" role="button"><i class="far fa-edit"></i>&nbsp;Editar</a>
             <a class="btn btn-danger btn-sm" style="color:#fff" href="javascript:func()" role="button" onclick="aviso(<?php echo $idColecao ?>)"><i class="far fa-trash-alt"></i>&nbsp;Remover</a>
-            <a class="btn btn-info btn-sm" style="color:#fff" href="cadastro_peca.php?id=<?php echo $idColecao ?>" role="button"><i class="far fa-plus-square"></i>&nbsp;Adicionar peça</a></td>
+            <a class="btn btn-info btn-sm" style="color:#fff" href="cadastro_peca.php?id=<?php echo $idColecao ?>" role="button"><i class="far fa-plus-square"></i>&nbsp;Adicionar peça</a>
+            <a class="btn btn-secondary btn-sm" style="color:#fff" href="listarPecas.php?id=<?php echo $idColecao ?>" role="button"><i class="far fa-folder-open"></i>&nbsp;Abrir</a></td>
         <?php } ?>
         </tr>
     </table>

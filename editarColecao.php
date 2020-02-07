@@ -10,10 +10,10 @@
 $nomeDaInclude2 = "navbar.inc.php";
 require_once $nomeDaInclude2;
 $idColecao = $_GET['id'];
-?> 
+?>
 
 <body>
-<div class="container" style="margin: 40px auto; width: 500px">
+  <div class="container" style="margin: 40px auto; width: 500px">
     <h4> Editar Coleção </h4>
     <form action="_atualizarColecao.php" method="post" enctype="multipart/form-data" style="margin-top: 20px">
       <?php
@@ -152,4 +152,5 @@ $idColecao = $_GET['id'];
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
+
 </html>

@@ -95,6 +95,7 @@
 				`decoracao` VARCHAR(50) NULL,
 				`parte` VARCHAR(50) NULL,
 				`observacoes` VARCHAR(200) NULL,
+				`idAnalise` INT NULL,
 				CONSTRAINT `fk_pecas_colecoes1`
 				  FOREIGN KEY (`idColecao`)
 				  REFERENCES `arqueoTeste`.`colecoes` (`idColecao`)
