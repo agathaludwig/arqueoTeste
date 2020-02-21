@@ -97,7 +97,7 @@ $idColecao = $_GET['id'];
               if ($idAnalise != null) {
               ?> <a style="color: #0d9e00" href="analise.php?id=<?php echo $idAnalise ?>" target="_blank"><i class="fas fa-check"></i></a>
             <?php } else {
-            ?> <a style="color: #f20000" href="cadastro_analise.php?idColecao=<?php echo $idColecao ?>&numCatalogo=<?php echo $numCatalogo ?>" target="_blank"><i class="fas fa-times"></i></a>
+            ?> <a style="color: #f20000" href="cadastro_analise.php?idPeca=<?php echo $idPeca ?>" target="_blank"><i class="fas fa-times"></i></a>
             <?php } ?> </td>
 
           <td><a class="btn btn-warning btn-sm" style="color:#fff" href="editarPeca.php?id=<?php echo $idPeca ?>" role="button"><i class="far fa-edit"></i>&nbsp;Editar</a>
